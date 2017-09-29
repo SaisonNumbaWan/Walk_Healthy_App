@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WalkHealthy.iml" filepath="$PROJECT_DIR$/WalkHealthy.iml" />
+      <module fileurl="file://D:\GitProjects\Walk_Healthy_App\WalkHealthy\WalkHealthy.iml" filepath="D:\GitProjects\Walk_Healthy_App\WalkHealthy\WalkHealthy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\GitProjects\Walk_Healthy_App\WalkHealthy\app\app.iml" filepath="D:\GitProjects\Walk_Healthy_App\WalkHealthy\app\app.iml" />
     </modules>
   </component>
 </project>

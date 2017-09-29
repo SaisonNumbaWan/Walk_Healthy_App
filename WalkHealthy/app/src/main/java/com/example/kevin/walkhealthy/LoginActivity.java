@@ -16,11 +16,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    //views and widget fields to assign id's
-    Button createUser, moveToLogin;
+    //Views and widget fields
+    Button loginButton;
     EditText userEmailEdit, userPasswordEdit;
+
+    //String fields
+    String userEmailString, userPasswordString;
 
     //Firebase authentication fields
     FirebaseAuth mAuth;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
@@ -38,21 +42,21 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         mAuth.removeAuthStateListener(mAuthListener);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         //Assign ID's
-        createUser = (Button) findViewById(R.id.createButton);
-        moveToLogin = (Button) findViewById(R.id.moveToLogin);
-        userEmailEdit = (EditText) findViewById(R.id.emailEditTextCreate);
-        userPasswordEdit = (EditText) findViewById(R.id.passwordEditTextCreate);
-
+        loginButton = (Button) findViewById(R.id.loginActivityButton);
+        userEmailEdit = (EditText) findViewById(R.id.loginEmailEditText);
+        userPasswordEdit = (EditText) findViewById(R.id.loginPasswordEditText);
 
         //Assign Instances
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null)
                 {
 
-                    startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+                    startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
 
                 }
                 else
@@ -76,34 +80,33 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
-        //Creating the onclick listeners
-
-        createUser.setOnClickListener(new View.OnClickListener() {
+        //On click listeners
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String userEmailString, userPassString;
-
+                //Perform login operation
                 userEmailString = userEmailEdit.getText().toString().trim();
-                userPassString = userPasswordEdit.getText().toString().trim();
+                userPasswordString = userPasswordEdit.getText().toString().trim();
 
-                if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPassString))
+                if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPasswordString))
                 {
 
-                    mAuth.createUserWithEmailAndPassword(userEmailString, userPassString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(userEmailString, userPasswordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if(task.isSuccessful())
                             {
+                                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
 
-                                Toast.makeText(MainActivity.this, "User Account Created", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+
                             }
                             else
                             {
-                                Toast.makeText(MainActivity.this, "Failed to create the User Account", Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(LoginActivity.this, "User Login Failed", Toast.LENGTH_LONG).show();
+
                             }
 
                         }
@@ -111,24 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-
             }
         });
-
-        //Move to login onclick listener
-
-        moveToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-            }
-        });
-
-
-
-
 
 
 
