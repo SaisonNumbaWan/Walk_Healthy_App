@@ -7,13 +7,14 @@
     tools:context="com.example.kevin.walkhealthy.WelcomeActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcomeUserEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="183dp"
-        android:text="Welcome to Walk Healthy" />
+        android:layout_marginTop="90dp"
+        android:text="Hello!"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/logoutButton"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="118dp"
+        android:layout_marginBottom="127dp"
         android:text="Logout" />
+
 </RelativeLayout>

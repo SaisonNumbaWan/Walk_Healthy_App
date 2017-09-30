@@ -1,5 +1,6 @@
 package com.example.kevin.walkhealthy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,9 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     //String fields
     String userEmailString, userPasswordString;
 
+
+    private ProgressDialog progressDialog;
+
     //Firebase authentication fields
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+
+    DatabaseReference mDatabaseRef;
 
     @Override
     protected void onStart() {
@@ -50,12 +63,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressDialog = new ProgressDialog(this);
+
         //Assign ID's
         loginButton = (Button) findViewById(R.id.loginActivityButton);
         userEmailEdit = (EditText) findViewById(R.id.loginEmailEditText);
         userPasswordEdit = (EditText) findViewById(R.id.loginPasswordEditText);
 
         //Assign Instances
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -69,7 +86,23 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null)
                 {
 
-                    startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                    final String email = user.getEmail();
+
+                    mDatabaseRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            checkUserValidation(dataSnapshot, email);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
 
                 }
                 else
@@ -91,14 +124,32 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPasswordString))
                 {
-
+                    progressDialog.setMessage("Logging in....");
+                    progressDialog.show();
                     mAuth.signInWithEmailAndPassword(userEmailString, userPasswordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
+                            progressDialog.dismiss();
                             if(task.isSuccessful())
                             {
-                                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+
+                                //startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+
+
+                                mDatabaseRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        checkUserValidation(dataSnapshot, userEmailString);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
 
 
                             }
@@ -120,4 +171,35 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+       //delete this if program stops working
+    private void checkUserValidation(DataSnapshot dataSnapshot, String passedEmail)
+    {
+
+        Iterator iterator = dataSnapshot.getChildren().iterator();
+
+        while (iterator.hasNext())
+        {
+
+            DataSnapshot dataUser = (DataSnapshot) iterator.next();
+
+            if (dataUser.child("emailUser").getValue().toString().equals(passedEmail))
+            {
+                if (dataUser.child("isVerified").getValue().toString().equals("unverified"))
+                {
+                    Intent in = new Intent(LoginActivity.this, ProfileActivity.class);
+                    in.putExtra("USER_KEY", dataUser.child("userKey").getValue().toString());
+                    startActivity(in);
+
+                }
+                else
+                {
+                    startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                }
+            }
+
+        }
+
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.kevin.walkhealthy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +30,14 @@ public class MainActivity extends AppCompatActivity {
     Button createUser, moveToLogin;
     EditText userEmailEdit, userPasswordEdit;
 
+    //Will create a progress loader when registering users
+    private ProgressDialog progressDialog;
+
     //Firebase authentication fields
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+
+    DatabaseReference mDatabaseRef, mUserCheckData;
 
     @Override
     protected void onStart() {
@@ -45,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressDialog = new ProgressDialog(this);
+
         //Assign ID's
         createUser = (Button) findViewById(R.id.createButton);
         moveToLogin = (Button) findViewById(R.id.moveToLogin);
@@ -53,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Assign Instances
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        mUserCheckData = FirebaseDatabase.getInstance().getReference().child("Users");
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -65,7 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null)
                 {
 
-                    startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+                    //startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+
+
+                    final String email = user.getEmail();
+
+                    mUserCheckData.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            checkUserValidation(dataSnapshot, email);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
 
                 }
                 else
@@ -83,23 +120,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String userEmailString, userPassString;
+                final String userEmailString, userPassString;
 
                 userEmailString = userEmailEdit.getText().toString().trim();
                 userPassString = userPasswordEdit.getText().toString().trim();
 
                 if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPassString))
                 {
-
+                    progressDialog.setMessage("Registering User....");
+                    progressDialog.show();
                     mAuth.createUserWithEmailAndPassword(userEmailString, userPassString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
+                            progressDialog.dismiss();
                             if(task.isSuccessful())
                             {
 
+                                DatabaseReference mChildDatabase = mDatabaseRef.child("Users").push();
+
+                                String key_user = mChildDatabase.getKey();
+
+                                mChildDatabase.child("isVerified").setValue("unverified");
+                                mChildDatabase.child("userKey").setValue(key_user);
+                                mChildDatabase.child("emailUser").setValue(userEmailString);
+                                mChildDatabase.child("passWordUser").setValue(userPassString);
+
+
                                 Toast.makeText(MainActivity.this, "User Account Created", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+                                finish();
+
+                                //Don't uncomment this, will crash program
+                                //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                             }
                             else
                             {
@@ -133,4 +184,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void checkUserValidation(DataSnapshot dataSnapshot, String passedEmail)
+    {
+
+        Iterator iterator = dataSnapshot.getChildren().iterator();
+
+        while (iterator.hasNext())
+        {
+
+            DataSnapshot dataUser = (DataSnapshot) iterator.next();
+
+            if (dataUser.child("emailUser").getValue().toString().equals(passedEmail))
+            {
+                if (dataUser.child("isVerified").getValue().toString().equals("unverified"))
+                {
+                    Intent in = new Intent(MainActivity.this, ProfileActivity.class);
+                    in.putExtra("USER_KEY", dataUser.child("userKey").getValue().toString());
+                    startActivity(in);
+
+                }
+                else
+                {
+                    startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
+                }
+            }
+
+        }
+
+    }
+
+
+
 }

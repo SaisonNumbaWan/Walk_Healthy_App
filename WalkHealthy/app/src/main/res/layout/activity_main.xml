@@ -33,18 +33,30 @@
         android:id="@+id/createButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/passwordEditTextCreate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Create" />
+        android:layout_marginTop="39dp"
+        android:text="Register" />
 
     <Button
         android:id="@+id/moveToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createButton"
-        android:layout_alignStart="@+id/createButton"
         android:layout_below="@+id/createButton"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Walk Healthy"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
 </RelativeLayout>
