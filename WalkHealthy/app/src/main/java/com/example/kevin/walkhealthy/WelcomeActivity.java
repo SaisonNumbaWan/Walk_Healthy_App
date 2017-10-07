@@ -17,6 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     //Declare Fields
     Button logoutBtn;
+    Button createGroupBtn;
     TextView textViewUserEmail;
 
     //Firebase authentication fields
@@ -35,6 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //Assign ID's
         logoutBtn = (Button) findViewById(R.id.logoutButton);
         textViewUserEmail = (TextView) findViewById(R.id.welcomeUserEmailTextView) ;
+        createGroupBtn = (Button)findViewById(R.id.createGroupButton);
 
         //Assign Instances
         mAuth = FirebaseAuth.getInstance();
@@ -80,6 +82,13 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        createGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelcomeActivity.this, GroupCreate.class));
+
+            }
+            });
 
     }
 
