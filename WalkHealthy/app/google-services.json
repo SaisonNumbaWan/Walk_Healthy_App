@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "202087604540-sf1skl9rv78dhie822d0niq7p813e7b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kevin.walkhealthy",
+            "certificate_hash": "ac8f0d80c9155db215b48daabe59fd962a0d3a63"
+          }
+        },
+        {
           "client_id": "202087604540-5si9b7oacvnqhu9gd6ifpngitvm8dl5n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

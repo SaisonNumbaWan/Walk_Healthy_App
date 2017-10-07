@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/collegeEditText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="85dp"
         android:text="Save your group information" />
 
     <TextView
