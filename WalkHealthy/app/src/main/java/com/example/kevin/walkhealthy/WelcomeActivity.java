@@ -69,7 +69,13 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
 
+        createGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                startActivity(new Intent(WelcomeActivity.this, GroupActivity.class));
+            }
+        });
 
         //Set on click listener to logout
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,15 +87,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
             }
         });
-
-        createGroupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(WelcomeActivity.this, GroupCreate.class));
-
-            }
-            });
 
     }
 
