@@ -19,7 +19,10 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".GroupActivity" />
+        <activity android:name=".EventActivity" />
+        <activity android:name=".EventCreateActivity"></activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.EventLog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     //Declare Fields
     Button logoutBtn;
+    Button createGroupBtn;
+    Button navigateToSearchBtn;
     TextView textViewUserEmail;
 
     //Firebase authentication fields
@@ -35,6 +38,8 @@ public class WelcomeActivity extends AppCompatActivity {
         //Assign ID's
         logoutBtn = (Button) findViewById(R.id.logoutButton);
         textViewUserEmail = (TextView) findViewById(R.id.welcomeUserEmailTextView) ;
+        createGroupBtn = findViewById(R.id.createGroupButton);
+        navigateToSearchBtn = findViewById(R.id.btnNavigateToSearch);
 
         //Assign Instances
         mAuth = FirebaseAuth.getInstance();
@@ -67,6 +72,25 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
 
+        //Button to navigate to Search Event page
+
+
+        createGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(WelcomeActivity.this, GroupActivity.class));
+            }
+        });
+
+        navigateToSearchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(WelcomeActivity.this, EventActivity.class));
+            }
+        });
+
+
 
 
         //Set on click listener to logout
@@ -79,7 +103,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
             }
         });
-
 
     }
 
