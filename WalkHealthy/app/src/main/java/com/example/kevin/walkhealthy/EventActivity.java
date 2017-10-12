@@ -67,6 +67,7 @@ public class EventActivity extends AppCompatActivity {
                             {
                                 if(ds.child("EventStartingLocation").getValue().equals(strLocation))
                                 {
+                                    eventNameView.setText(ds.child("EventName").getValue().toString());
                                     eventNameView.setText(ds.getValue().toString());
                                 }
                             }
