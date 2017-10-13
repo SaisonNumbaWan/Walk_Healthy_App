@@ -43,14 +43,15 @@ public class EventActivity extends AppCompatActivity {
         //Assign IDs
         Button searchEventBtn = (Button) findViewById(R.id.btnSearchEvent);
         Button createEventBtn = (Button) findViewById(R.id.btnCreateEvent);
+        final ListView eventList = (ListView) findViewById(R.id.eventList);
+        final ArrayList<String> eventListString = new ArrayList<String>();
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_event, eventListString);
         final TextView eventNameView = (TextView)findViewById(R.id.eventNameTextView);
         final TextView eventStartView = (TextView) findViewById(R.id.eventStartingLocationTextView);
         final TextView eventDateView = (TextView)findViewById(R.id.eventDateTextView);
         final EditText editTextLocation = (EditText) findViewById(R.id.editTextLocation);
-
-
-
         String strLocation = editTextLocation.getText().toString();
+
 
         searchEventBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,9 +70,13 @@ public class EventActivity extends AppCompatActivity {
                             {
                                 if(ds.child("EventStartingLocation").getValue().equals(strLocation))
                                 {
-                                    eventNameView.setText(ds.child("EventName").getValue().toString());
-                                    eventStartView.setText("Starts At: "+ds.child("EventStartingLocation").getValue().toString());
-                                    eventDateView.setText("On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString());
+                                    eventListString.add(ds.child("EventName").getValue().toString());
+                                    eventList.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+
+                                    //eventNameView.setText(ds.child("EventName").getValue().toString());
+                                    //eventStartView.setText("Starts At: "+ds.child("EventStartingLocation").getValue().toString());
+                                    //eventDateView.setText("On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString());
                                 }
                             }
 
