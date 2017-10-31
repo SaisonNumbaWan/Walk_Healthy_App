@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,10 @@ import java.util.Map;
 public class EventActivity extends AppCompatActivity {
 
     private DatabaseReference mDataRef;
-
+    public int clickCount;
+    public String timeStart;
+    public String duration;
+    public String intensity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
@@ -41,11 +45,18 @@ public class EventActivity extends AppCompatActivity {
 
 
         //Assign IDs
-        Button searchEventBtn = (Button) findViewById(R.id.btnSearchEvent);
-        Button createEventBtn = (Button) findViewById(R.id.btnCreateEvent);
-        final ListView eventList = (ListView) findViewById(R.id.eventList);
-        final ArrayList<String> eventListString = new ArrayList<String>();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_event, eventListString);
+        final Button searchRefinement = (Button) findViewById(R.id.searchRefinement);
+        searchRefinement.setVisibility(View.INVISIBLE);
+        final Spinner refinementSpinner0 = (Spinner)findViewById(R.id.refinementSpinner0);
+        refinementSpinner0.setVisibility(View.INVISIBLE);
+        final Spinner refinementSpinner1 = (Spinner)findViewById(R.id.refinementSpinner1);
+        refinementSpinner1.setVisibility(View.INVISIBLE);
+        final Spinner refinementSpinner2 = (Spinner)findViewById(R.id.refinementSpinner2);
+        refinementSpinner2.setVisibility(View.INVISIBLE);
+        final Button addRefinement = (Button) findViewById(R.id.addRefinement);
+        addRefinement.setVisibility(View.INVISIBLE);
+        final Button searchEventBtn = (Button) findViewById(R.id.btnSearchEvent);
+        final Button createEventBtn = (Button) findViewById(R.id.btnCreateEvent);
         final TextView eventNameView = (TextView)findViewById(R.id.eventNameTextView);
         final TextView eventStartView = (TextView) findViewById(R.id.eventStartingLocationTextView);
         final TextView eventDateView = (TextView)findViewById(R.id.eventDateTextView);
@@ -57,6 +68,10 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //get the location to search
+                createEventBtn.setVisibility(View.INVISIBLE);
+                editTextLocation.setVisibility(View.INVISIBLE);
+                searchRefinement.setVisibility(View.VISIBLE);
+
                 final String strLocation = editTextLocation.getText().toString();
 
 
@@ -65,21 +80,26 @@ public class EventActivity extends AppCompatActivity {
                 mDataRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                            //eventNameView.setText(dataSnapshot.getValue().toString());
+
+                        if(!(refinementSpinner0.VISIBLE == 0))
+                        {
                             for(DataSnapshot ds : dataSnapshot.getChildren())
                             {
                                 if(ds.child("EventStartingLocation").getValue().equals(strLocation))
                                 {
-                                    eventListString.add(ds.child("EventName").getValue().toString());
-                                    eventList.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
-
-                                    //eventNameView.setText(ds.child("EventName").getValue().toString());
-                                    //eventStartView.setText("Starts At: "+ds.child("EventStartingLocation").getValue().toString());
-                                    //eventDateView.setText("On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString());
+                                    eventNameView.setText(ds.child("EventName").getValue().toString());
+                                    eventStartView.setText("Starts At: "+ds.child("EventStartingLocation").getValue().toString());
+                                    eventDateView.setText("On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString());
                                 }
                             }
+                        }
+                        else
+                        {
+                            switch(refinementSpinner0.getSelectedItem().toString())
+                            {
 
+                            }
+                        }
                     }
 
                     @Override
@@ -88,25 +108,32 @@ public class EventActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
 
+        searchRefinement.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                searchRefinement.setVisibility(View.INVISIBLE);
+                refinementSpinner0.setVisibility(View.VISIBLE);
+                addRefinement.setVisibility(View.VISIBLE);
+                clickCount += 1;
+            }
+        });
 
-
-
-
-                /*addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                       //eventNameView.setText(dataSnapshot.getKey());
-                        Event event = dataSnapshot.getValue(Event.class);
-                       eventNameView.setText(event.getEventName());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });*/
-
+        addRefinement.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                clickCount += 1;
+                if(clickCount == 2)
+                {
+                    refinementSpinner1.setVisibility(View.VISIBLE);
+                }
+                else if(clickCount == 3)
+                {
+                    refinementSpinner2.setVisibility(View.VISIBLE);
+                    addRefinement.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

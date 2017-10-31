@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnCreateEvent"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
         android:text="search" />
 
     <TextView
@@ -70,6 +69,54 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/editTextLocation"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="190dp" />
+
+    <Button
+        android:id="@+id/searchRefinement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextLocation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:text="Refine Search" />
+
+    <Spinner
+        android:id="@+id/refinementSpinner0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/refinementSpinner1"
+        android:layout_alignEnd="@+id/refinementSpinner1"
+        android:layout_alignRight="@+id/refinementSpinner1"
+        android:layout_marginBottom="11dp"
+        android:entries="@array/Refined" />
+
+    <Spinner
+        android:id="@+id/refinementSpinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/searchRefinement"
+        android:layout_alignEnd="@+id/refinementSpinner2"
+        android:layout_alignRight="@+id/refinementSpinner2"
+        android:entries="@array/Refined" />
+
+    <Spinner
+        android:id="@+id/refinementSpinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/searchRefinement"
+        android:layout_alignBottom="@+id/searchRefinement"
+        android:layout_alignEnd="@+id/btnSearchEvent"
+        android:layout_alignRight="@+id/btnSearchEvent"
+        android:entries="@array/Refined" />
+
+    <Button
+        android:id="@+id/addRefinement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSearchEvent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:text="Add new refinement" />
 
 </RelativeLayout>

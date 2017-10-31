@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Walk Healthy</string>
+    <string-array name="Refined">
+        <item>Time</item>
+        <item>Intensity</item>
+        <item>Duration</item>
+    </string-array>
 </resources>
