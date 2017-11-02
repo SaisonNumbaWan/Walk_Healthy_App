@@ -1,12 +1,14 @@
 package com.example.kevin.walkhealthy;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,23 +40,23 @@ public class EventActivity extends AppCompatActivity {
     public String timeStart;
     public String duration;
     public String intensity;
+    private ListView mDrawerList;
+    private ListView mItemList;
+    private ArrayAdapter<String> mAdapter;
+    private ArrayAdapter<String> dsAdapter;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
 
-
         //Assign IDs
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mItemList = (ListView)findViewById(R.id.eventList);
+        addDrawerItems();
+        final DrawerLayout mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         final Button searchRefinement = (Button) findViewById(R.id.searchRefinement);
         searchRefinement.setVisibility(View.INVISIBLE);
-        final Spinner refinementSpinner0 = (Spinner)findViewById(R.id.refinementSpinner0);
-        refinementSpinner0.setVisibility(View.INVISIBLE);
-        final Spinner refinementSpinner1 = (Spinner)findViewById(R.id.refinementSpinner1);
-        refinementSpinner1.setVisibility(View.INVISIBLE);
-        final Spinner refinementSpinner2 = (Spinner)findViewById(R.id.refinementSpinner2);
-        refinementSpinner2.setVisibility(View.INVISIBLE);
-        final Button addRefinement = (Button) findViewById(R.id.addRefinement);
-        addRefinement.setVisibility(View.INVISIBLE);
         final Button searchEventBtn = (Button) findViewById(R.id.btnSearchEvent);
         final Button createEventBtn = (Button) findViewById(R.id.btnCreateEvent);
         final TextView eventNameView = (TextView)findViewById(R.id.eventNameTextView);
@@ -81,25 +83,8 @@ public class EventActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(!(refinementSpinner0.VISIBLE == 0))
-                        {
-                            for(DataSnapshot ds : dataSnapshot.getChildren())
-                            {
-                                if(ds.child("EventStartingLocation").getValue().equals(strLocation))
-                                {
-                                    eventNameView.setText(ds.child("EventName").getValue().toString());
-                                    eventStartView.setText("Starts At: "+ds.child("EventStartingLocation").getValue().toString());
-                                    eventDateView.setText("On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString());
-                                }
-                            }
-                        }
-                        else
-                        {
-                            switch(refinementSpinner0.getSelectedItem().toString())
-                            {
+                        addEventItem(dataSnapshot, strLocation);
 
-                            }
-                        }
                     }
 
                     @Override
@@ -114,28 +99,10 @@ public class EventActivity extends AppCompatActivity {
         searchRefinement.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                searchRefinement.setVisibility(View.INVISIBLE);
-                refinementSpinner0.setVisibility(View.VISIBLE);
-                addRefinement.setVisibility(View.VISIBLE);
-                clickCount += 1;
+                mDrawerLayout.openDrawer(Gravity.START);
             }
         });
 
-        addRefinement.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                clickCount += 1;
-                if(clickCount == 2)
-                {
-                    refinementSpinner1.setVisibility(View.VISIBLE);
-                }
-                else if(clickCount == 3)
-                {
-                    refinementSpinner2.setVisibility(View.VISIBLE);
-                    addRefinement.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
 
         createEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,4 +113,24 @@ public class EventActivity extends AppCompatActivity {
         });
 
     }//OnCreate
+
+    private void addEventItem(DataSnapshot dataSnapshot, String strLocation){
+        ArrayList<String> eventItems = new ArrayList<>();
+        for(DataSnapshot ds : dataSnapshot.getChildren())
+        {
+            if(ds.child("EventStartingLocation").getValue().equals(strLocation))
+            {
+                eventItems.add(ds.child("EventName").getValue().toString() + "\n" +
+                        "Starts At: "+ds.child("EventStartingLocation").getValue().toString() + "\n" +
+                        "On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString() + "\n");
+            }
+        }
+        dsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventItems);
+        mItemList.setAdapter(dsAdapter);
+    }
+    private void addDrawerItems(){
+        String[] filterNames = {"Duration", "Time", "Intensity"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filterNames);
+        mDrawerList.setAdapter(mAdapter);
+    }
 }
