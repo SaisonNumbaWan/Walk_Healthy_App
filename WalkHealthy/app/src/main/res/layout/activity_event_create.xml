@@ -17,36 +17,12 @@
         android:text="Create" />
 
     <EditText
-        android:id="@+id/txtEventMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnCreateEvent"
-        android:layout_alignRight="@+id/btnCreateEvent"
-        android:layout_below="@+id/txtEventDay"
-        android:ems="10"
-        android:hint="Month"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtEventDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventMonth"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txtEventMonth"
-        android:layout_marginTop="38dp"
-        android:ems="10"
-        android:hint="Day"
-        android:inputType="textPersonName" />
-
-    <EditText
         android:id="@+id/txtEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventMonth"
-        android:layout_alignStart="@+id/txtEventMonth"
-        android:layout_below="@+id/txtEventMonth"
-        android:layout_marginTop="17dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="Event Name"
         android:inputType="textPersonName" />
@@ -55,10 +31,9 @@
         android:id="@+id/txtEventStartingLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventName"
-        android:layout_alignStart="@+id/txtEventName"
-        android:layout_below="@+id/txtEventName"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
         android:ems="10"
         android:hint="Starting Location"
         android:inputType="textPersonName" />
@@ -67,11 +42,26 @@
         android:id="@+id/txtEventEndingLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventStartingLocation"
-        android:layout_alignStart="@+id/txtEventStartingLocation"
-        android:layout_below="@+id/txtEventStartingLocation"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="132dp"
         android:ems="10"
         android:hint="Ending Location"
         android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/monthSpinner"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="148dp" />
+
+    <Spinner
+        android:id="@+id/daySpinner"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="204dp" />
 </RelativeLayout>
