@@ -5,4 +5,5 @@
         <item>Intensity</item>
         <item>Duration</item>
     </string-array>
+    <string name="title_activity_register_new_user">RegisterNewUserActivity</string>
 </resources>

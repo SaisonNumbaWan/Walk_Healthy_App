@@ -119,50 +119,7 @@ public class MainActivity extends AppCompatActivity {
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final String userEmailString, userPassString;
-
-                userEmailString = userEmailEdit.getText().toString().trim();
-                userPassString = userPasswordEdit.getText().toString().trim();
-
-                if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPassString))
-                {
-                    progressDialog.setMessage("Registering User....");
-                    progressDialog.show();
-                    mAuth.createUserWithEmailAndPassword(userEmailString, userPassString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
-                            if(task.isSuccessful())
-                            {
-
-                                DatabaseReference mChildDatabase = mDatabaseRef.child("Users").push();
-
-                                String key_user = mChildDatabase.getKey();
-
-                                mChildDatabase.child("isVerified").setValue("unverified");
-                                mChildDatabase.child("userKey").setValue(key_user);
-                                mChildDatabase.child("emailUser").setValue(userEmailString);
-                                mChildDatabase.child("passWordUser").setValue(userPassString);
-
-
-                                Toast.makeText(MainActivity.this, "User Account Created", Toast.LENGTH_LONG).show();
-                                finish();
-
-                                //Don't uncomment this, will crash program
-                                //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                            }
-                            else
-                            {
-                                Toast.makeText(MainActivity.this, "Failed to create the User Account", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                    });
-
-                }
-
-
+                startActivity(new Intent(MainActivity.this, RegisterNewUserActivity.class));
             }
         });
 

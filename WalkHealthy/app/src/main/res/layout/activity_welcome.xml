@@ -23,14 +23,16 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:text="Logout" />
+        android:text="Logout"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored" />
 
     <Button
         android:id="@+id/createGroupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="100dp"
         android:text="Create New Group" />
 
     <Button
@@ -41,5 +43,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="Search Events" />
+
+    <Spinner
+        android:id="@+id/mainActivitySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>
