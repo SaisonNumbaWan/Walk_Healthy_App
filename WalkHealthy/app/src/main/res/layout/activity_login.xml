@@ -11,9 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loginPasswordEditText"
-        android:layout_alignLeft="@+id/loginPasswordEditText"
-        android:layout_alignStart="@+id/loginPasswordEditText"
-        android:layout_marginBottom="12dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
         android:ems="10"
         android:hint="Enter your email"
         android:inputType="textPersonName"
@@ -24,20 +23,23 @@
         android:id="@+id/loginPasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/loginActivityButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
+        android:layout_alignLeft="@+id/loginEmailEditText"
+        android:layout_alignStart="@+id/loginEmailEditText"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Enter your password"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/loginActivityButton"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/loginPasswordEditText"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Login" />
+        android:layout_marginTop="59dp"
+        android:text="Login"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -45,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="63dp"
         android:text="Login"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp" />

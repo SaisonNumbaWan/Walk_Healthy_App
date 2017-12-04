@@ -9,20 +9,23 @@
 
     <Button
         android:id="@+id/btnCreateEvent"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txtEventEndingLocation"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
-        android:text="Create" />
+        android:layout_marginTop="47dp"
+        android:text="Create"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/txtEventMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnCreateEvent"
-        android:layout_alignRight="@+id/btnCreateEvent"
+        android:layout_alignLeft="@+id/txtEventDay"
+        android:layout_alignStart="@+id/txtEventDay"
         android:layout_below="@+id/txtEventDay"
+        android:layout_marginTop="11dp"
         android:ems="10"
         android:hint="Month"
         android:inputType="textPersonName" />
@@ -31,10 +34,9 @@
         android:id="@+id/txtEventDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventMonth"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txtEventMonth"
-        android:layout_marginTop="38dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
         android:ems="10"
         android:hint="Day"
         android:inputType="textPersonName" />
@@ -67,10 +69,9 @@
         android:id="@+id/txtEventEndingLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventStartingLocation"
-        android:layout_alignStart="@+id/txtEventStartingLocation"
         android:layout_below="@+id/txtEventStartingLocation"
-        android:layout_marginTop="14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Ending Location"
         android:inputType="textPersonName" />

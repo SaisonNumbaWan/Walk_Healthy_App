@@ -10,9 +10,9 @@
         android:id="@+id/usernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignLeft="@+id/cityEditText"
+        android:layout_alignStart="@+id/cityEditText"
         android:ems="10"
         android:hint="Enter your username"
         android:inputType="textPersonName"
@@ -23,9 +23,10 @@
         android:id="@+id/cityEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/usernameEditText"
-        android:layout_alignStart="@+id/usernameEditText"
-        android:layout_below="@+id/usernameEditText"
+        android:layout_above="@+id/stateEditText"
+        android:layout_alignLeft="@+id/stateEditText"
+        android:layout_alignStart="@+id/stateEditText"
+        android:layout_marginBottom="17dp"
         android:ems="10"
         android:hint="Enter your city"
         android:inputType="textPersonName" />
@@ -34,9 +35,10 @@
         android:id="@+id/stateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cityEditText"
-        android:layout_alignStart="@+id/cityEditText"
-        android:layout_below="@+id/cityEditText"
+        android:layout_above="@+id/collegeEditText"
+        android:layout_alignLeft="@+id/collegeEditText"
+        android:layout_alignStart="@+id/collegeEditText"
+        android:layout_marginBottom="21dp"
         android:ems="10"
         android:hint="Enter your state"
         android:inputType="textPersonName" />
@@ -53,6 +55,7 @@
         android:layout_toStartOf="@+id/usernameEditText"
         android:text="Username: "
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -65,6 +68,7 @@
         android:layout_marginTop="12dp"
         android:text="City:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -77,15 +81,19 @@
         android:layout_alignStart="@+id/textView2"
         android:text="State:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/collegeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/stateEditText"
-        android:layout_alignRight="@+id/stateEditText"
-        android:layout_below="@+id/stateEditText"
+        android:layout_above="@+id/initialSaveUserProfileBtn"
+        android:layout_alignLeft="@+id/initialSaveUserProfileBtn"
+        android:layout_alignStart="@+id/initialSaveUserProfileBtn"
+        android:layout_marginBottom="47dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         android:ems="10"
         android:hint="Enter your college"
         android:inputType="textPersonName" />
@@ -100,25 +108,30 @@
         android:layout_marginTop="13dp"
         android:text="College:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/initialSaveUserProfileBtn"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/collegeEditText"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
-        android:text="Save Your Profile Data" />
+        android:layout_marginBottom="96dp"
+        android:text="Save Your Profile Data"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/usernameEditText"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
         android:text="Create your user profile"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
 </RelativeLayout>
