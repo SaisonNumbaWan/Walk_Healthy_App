@@ -9,12 +9,14 @@
 
     <Button
         android:id="@+id/btnSearchEvent"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnCreateEvent"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="22dp"
-        android:text="search" />
+        android:text="Search"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/eventNameTextView"
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnSearchEvent"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
         android:ems="10"
         android:hint="Enter Event Location"
         android:inputType="textPersonName"
@@ -39,12 +42,14 @@
 
     <Button
         android:id="@+id/btnCreateEvent"
-        style="@style/Widget.AppCompat.Button.Small"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Create An Event" />
+        android:layout_marginBottom="29dp"
+        android:text="Create An Event"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/eventStartingLocationTextView"

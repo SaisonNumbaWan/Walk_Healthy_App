@@ -6,57 +6,45 @@
     android:layout_height="match_parent"
     tools:context="com.example.kevin.walkhealthy.MainActivity">
 
-    <EditText
-        android:id="@+id/emailEditTextCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:ems="10"
-        android:hint="Enter you email"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/passwordEditTextCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/emailEditTextCreate"
-        android:layout_alignStart="@+id/emailEditTextCreate"
-        android:layout_below="@+id/emailEditTextCreate"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Enter your password"
-        android:inputType="textPersonName" />
-
     <Button
         android:id="@+id/createButton"
+
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/passwordEditTextCreate"
-        android:layout_marginTop="39dp"
-        android:text="Register" />
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/moveToLogin"
+        android:layout_alignStart="@+id/moveToLogin"
+        android:layout_marginBottom="31dp"
+        android:text="Register"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/moveToLogin"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/createButton"
+        android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:text="Login" />
+        android:text="Login"
+        android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView4"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Walk Healthy"
-        android:textColor="@color/colorPrimary"
-        android:textSize="24sp" />
+        app:srcCompat="@drawable/whlogo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/walk" />
+
 </RelativeLayout>

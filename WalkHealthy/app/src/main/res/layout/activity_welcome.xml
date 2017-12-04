@@ -12,34 +12,41 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="72dp"
         android:text="Hello!"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/logoutButton"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:text="Logout" />
+        android:layout_marginBottom="44dp"
+        android:text="Logout"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/createGroupButton"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/welcomeUserEmailTextView"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Create New Group" />
+        android:layout_marginTop="82dp"
+        android:text="Create New Group"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnNavigateToSearch"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/createGroupButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Search Events" />
+        android:layout_marginTop="34dp"
+        android:text="Search Events"
+        android:textSize="18sp" />
 
 </RelativeLayout>
