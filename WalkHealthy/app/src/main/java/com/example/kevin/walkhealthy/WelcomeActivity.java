@@ -43,7 +43,7 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
     Spinner spinner;
 
     //Spinner options
-    private static final String[]spinnerOptions = {"Event Actions", "Create New Event", "Search for an Event", "Create a New Group"};
+    private static final String[]spinnerOptions = {"Event Actions", "Create New Event", "Search for an Event"};
 
     //Firebase authentication fields
     FirebaseAuth mAuth;
@@ -205,8 +205,9 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
             SM.registerListener(this, counter, SensorManager.SENSOR_DELAY_NORMAL);
         }
         else
+        {
             Toast.makeText(this, "Error: Sensor Not Found!", Toast.LENGTH_SHORT).show();
-        
+        }
     }
 
     protected void onPause(){

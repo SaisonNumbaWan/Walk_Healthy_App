@@ -89,8 +89,9 @@ public class EventCreateActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(EventCreateActivity.this, "Event Created", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(EventCreateActivity.this, EventActivity.class));
                 }
-                else
+                else {
                     Toast.makeText(EventCreateActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

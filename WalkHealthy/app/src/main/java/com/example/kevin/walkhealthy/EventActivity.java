@@ -381,7 +381,7 @@ public class EventActivity extends AppCompatActivity implements AdapterView.OnIt
     {
         lst.add("Event: "+ds.child("EventName").getValue().toString() + "\n" +
                 "Starts At: "+ds.child("EventStartingLocation").getValue().toString() + "\n" +
-                "On: "+ds.child("EventMonth").getValue().toString()+", "+ds.child("EventDay").getValue().toString() + "\n"+
+                "On: "+ds.child("EventMonth").getValue().toString()+"/"+ds.child("EventDay").getValue().toString() + "\n"+
                 "Beginning Time: "+ds.child("EventTime").getValue().toString() +"\n"+
                 "Intensity: "+ds.child("EventIntensity").getValue().toString());
     }

@@ -53,26 +53,22 @@ public class RegisterNewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String uEmail = email.getText().toString();
                 final String uPass = password.getText().toString();
-                final String uConfirmPass = confirmPassword.getText().toString();
 
-                if(!uEmail.isEmpty() && !uPass.isEmpty() && !uConfirmPass.isEmpty())
+                if(!uEmail.isEmpty() && !uPass.isEmpty())
                 {
                     if(mUserCheckData.child("emailUser").toString().equals(uEmail))
                     {
                         Toast.makeText(RegisterNewUserActivity.this, "That email is already in use", Toast.LENGTH_SHORT).show();
                     }
-                    else if(!uPass.equals(uConfirmPass))
-                    {
-                        Toast.makeText(RegisterNewUserActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                    }
                     else
+                    {
                         startActivity(new Intent(RegisterNewUserActivity.this, ProfileActivity.class));
-
+                    }
                 }
                 else
+                {
                     Toast.makeText(RegisterNewUserActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-
-
+                }
             }
         });
 
