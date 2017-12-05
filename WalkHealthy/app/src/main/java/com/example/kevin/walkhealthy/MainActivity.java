@@ -105,11 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                else
-                {
-
-                }
-
             }
         };
 
@@ -120,48 +115,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String userEmailString, userPassString;
+                final String uEmail, uPass;
 
-                userEmailString = userEmailEdit.getText().toString().trim();
-                userPassString = userPasswordEdit.getText().toString().trim();
+                uEmail = userEmailEdit.getText().toString().trim();
+                uPass = userPasswordEdit.getText().toString().trim();
 
-                if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPassString))
-                {
-                    progressDialog.setMessage("Registering User....");
+                if(!TextUtils.isEmpty(uEmail) && !TextUtils.isEmpty(uPass)){
+                    progressDialog.setMessage("Registering new user..");
                     progressDialog.show();
-                    mAuth.createUserWithEmailAndPassword(userEmailString, userPassString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.createUserWithEmailAndPassword(uEmail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressDialog.dismiss();
-                            if(task.isSuccessful())
-                            {
+                            if(task.isSuccessful()){
+                                DatabaseReference mDB = mDatabaseRef.child("Users").push();
+                                String key_user = mDB.getKey();
 
-                                DatabaseReference mChildDatabase = mDatabaseRef.child("Users").push();
+                                mDB.child("isVerified").setValue("unverified");
+                                mDB.child("userKey").setValue(key_user);
+                                mDB.child("emailUser").setValue(uEmail);
+                                mDB.child("passWordUser").setValue(uPass);
 
-                                String key_user = mChildDatabase.getKey();
-
-                                mChildDatabase.child("isVerified").setValue("unverified");
-                                mChildDatabase.child("userKey").setValue(key_user);
-                                mChildDatabase.child("emailUser").setValue(userEmailString);
-                                mChildDatabase.child("passWordUser").setValue(userPassString);
-
-
-                                Toast.makeText(MainActivity.this, "User Account Created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivity.this, "User Account Created!", Toast.LENGTH_SHORT).show();
                                 finish();
-
-                                //Don't uncomment this, will crash program
-                                //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                             }
                             else
-                            {
-                                Toast.makeText(MainActivity.this, "Failed to create the User Account", Toast.LENGTH_LONG).show();
-                            }
-
+                                Toast.makeText(MainActivity.this, "Failed to create account", Toast.LENGTH_SHORT).show();
                         }
+
                     });
-
                 }
-
 
             }
         });
@@ -176,13 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
     }
 
     private void checkUserValidation(DataSnapshot dataSnapshot, String passedEmail)
@@ -211,9 +187,5 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
     }
-
-
-
 }

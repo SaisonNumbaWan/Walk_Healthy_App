@@ -22,7 +22,11 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".GroupActivity" />
         <activity android:name=".EventActivity" />
-        <activity android:name=".EventCreateActivity"></activity>
+        <activity android:name=".EventCreateActivity" />
+        <activity
+            android:name=".RegisterNewUserActivity"
+            android:label="@string/title_activity_register_new_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
