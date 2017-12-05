@@ -7,71 +7,85 @@
     tools:context="com.example.kevin.walkhealthy.EventCreateActivity">
 
 
-    <Button
-        android:id="@+id/btnCreateEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
-        android:text="Create" />
-
-    <EditText
-        android:id="@+id/txtEventMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnCreateEvent"
-        android:layout_alignRight="@+id/btnCreateEvent"
-        android:layout_below="@+id/txtEventDay"
-        android:ems="10"
-        android:hint="Month"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtEventDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventMonth"
+    <ScrollView
+        style="@android:style/Widget.Material.ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txtEventMonth"
-        android:layout_marginTop="38dp"
-        android:ems="10"
-        android:hint="Day"
-        android:inputType="textPersonName" />
+        android:scrollbarStyle="insideOverlay"
+        android:visibility="visible">
 
-    <EditText
-        android:id="@+id/txtEventName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventMonth"
-        android:layout_alignStart="@+id/txtEventMonth"
-        android:layout_below="@+id/txtEventMonth"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="Event Name"
-        android:inputType="textPersonName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtEventStartingLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventName"
-        android:layout_alignStart="@+id/txtEventName"
-        android:layout_below="@+id/txtEventName"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Starting Location"
-        android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/txtEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnCreateEvent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="62dp"
+                android:ems="10"
+                android:hint="Event Name"
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/txtEventEndingLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtEventStartingLocation"
-        android:layout_alignStart="@+id/txtEventStartingLocation"
-        android:layout_below="@+id/txtEventStartingLocation"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:hint="Ending Location"
-        android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/txtEventStartingLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnCreateEvent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="126dp"
+                android:ems="10"
+                android:hint="Starting Location"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtEventEndingLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnCreateEvent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="197dp"
+                android:ems="10"
+                android:hint="Ending Location"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinnerEventIntensity"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:visibility="visible" />
+
+            <CalendarView
+                android:id="@+id/calendarEventCreate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="39dp" />
+
+            <EditText
+                android:id="@+id/editTextTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Event Starting Time"
+                android:inputType="time"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnCreateEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="26dp"
+                android:text="Create" />
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
